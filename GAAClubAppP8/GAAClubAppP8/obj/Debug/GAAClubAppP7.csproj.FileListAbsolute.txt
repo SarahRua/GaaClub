@@ -1,0 +1,9 @@
+c:\users\peter\documents\visual studio 2015\Projects\GAAClubAppP7\GAAClubAppP7\bin\Debug\GAAClubAppP7.exe.config
+c:\users\peter\documents\visual studio 2015\Projects\GAAClubAppP7\GAAClubAppP7\bin\Debug\GAAClubAppP7.exe
+c:\users\peter\documents\visual studio 2015\Projects\GAAClubAppP7\GAAClubAppP7\bin\Debug\GAAClubAppP7.pdb
+c:\users\peter\documents\visual studio 2015\Projects\GAAClubAppP7\GAAClubAppP7\obj\Debug\GAAClubAppP7.csprojResolveAssemblyReference.cache
+c:\users\peter\documents\visual studio 2015\Projects\GAAClubAppP7\GAAClubAppP7\obj\Debug\GAAClubAppP7.exe
+c:\users\peter\documents\visual studio 2015\Projects\GAAClubAppP7\GAAClubAppP7\obj\Debug\GAAClubAppP7.pdb
+C:\Users\Peter\Documents\Visual Studio 2015\Projects\GAAClubAppP8\GAAClubAppP7\bin\Debug\GAAClubAppP7.exe.config
+C:\Users\Peter\Documents\Visual Studio 2015\Projects\GAAClubAppP8\GAAClubAppP7\obj\Debug\GAAClubAppP7.exe
+C:\Users\Peter\Documents\Visual Studio 2015\Projects\GAAClubAppP8\GAAClubAppP7\obj\Debug\GAAClubAppP7.pdb
