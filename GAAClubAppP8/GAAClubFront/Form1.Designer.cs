@@ -52,6 +52,7 @@
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button3 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGaa)).BeginInit();
             this.SuspendLayout();
             // 
@@ -155,7 +156,7 @@
             // 
             // ButtonAdd
             // 
-            this.ButtonAdd.Location = new System.Drawing.Point(33, 390);
+            this.ButtonAdd.Location = new System.Drawing.Point(15, 390);
             this.ButtonAdd.Name = "ButtonAdd";
             this.ButtonAdd.Size = new System.Drawing.Size(75, 23);
             this.ButtonAdd.TabIndex = 12;
@@ -165,7 +166,7 @@
             // 
             // ButtonUpdate
             // 
-            this.ButtonUpdate.Location = new System.Drawing.Point(114, 390);
+            this.ButtonUpdate.Location = new System.Drawing.Point(96, 390);
             this.ButtonUpdate.Name = "ButtonUpdate";
             this.ButtonUpdate.Size = new System.Drawing.Size(75, 23);
             this.ButtonUpdate.TabIndex = 13;
@@ -177,9 +178,9 @@
             // 
             this.ButtonSummary.Location = new System.Drawing.Point(372, 208);
             this.ButtonSummary.Name = "ButtonSummary";
-            this.ButtonSummary.Size = new System.Drawing.Size(75, 23);
+            this.ButtonSummary.Size = new System.Drawing.Size(142, 23);
             this.ButtonSummary.TabIndex = 15;
-            this.ButtonSummary.Text = "Summarize";
+            this.ButtonSummary.Text = "Refresh Summary";
             this.ButtonSummary.UseVisualStyleBackColor = true;
             this.ButtonSummary.Click += new System.EventHandler(this.ButtonSummary_Click);
             // 
@@ -195,7 +196,7 @@
             this.Column6});
             this.dgvGaa.Location = new System.Drawing.Point(15, 24);
             this.dgvGaa.Name = "dgvGaa";
-            this.dgvGaa.Size = new System.Drawing.Size(651, 163);
+            this.dgvGaa.Size = new System.Drawing.Size(666, 163);
             this.dgvGaa.TabIndex = 16;
             this.dgvGaa.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGaa_CellContentClick);
             this.dgvGaa.SelectionChanged += new System.EventHandler(this.dgvGaa_SelectionChanged);
@@ -233,7 +234,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(195, 390);
+            this.button3.Location = new System.Drawing.Point(177, 390);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 14;
@@ -246,14 +247,26 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(372, 240);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(294, 173);
+            this.listBox1.Size = new System.Drawing.Size(309, 173);
             this.listBox1.TabIndex = 17;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(258, 390);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "Clear";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(678, 425);
+            this.ClientSize = new System.Drawing.Size(693, 425);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.dgvGaa);
             this.Controls.Add(this.ButtonSummary);
@@ -307,6 +320,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

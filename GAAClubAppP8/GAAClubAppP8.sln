@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GAAClubAppP8", "GAAClubAppP7\GAAClubAppP8.csproj", "{1A1EC42F-0CE9-48A0-982C-0314266EF103}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GAAClubAppP8.Test", "GAAClubAppP7.Test\GAAClubAppP8.Test.csproj", "{D0C66A9D-F9ED-41A5-9089-26BCD8AF38FC}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GAAClubFront", "GAAClubFront\GAAClubFront.csproj", "{F0CE9CF6-8641-4450-8BD6-0AF831BEA166}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GAAClubFront.Test", "GAAClubFront.Test\GAAClubFront.Test.csproj", "{A1C7982B-BCA1-4F20-86D4-DDCB88087CFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,18 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1A1EC42F-0CE9-48A0-982C-0314266EF103}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A1EC42F-0CE9-48A0-982C-0314266EF103}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A1EC42F-0CE9-48A0-982C-0314266EF103}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A1EC42F-0CE9-48A0-982C-0314266EF103}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D0C66A9D-F9ED-41A5-9089-26BCD8AF38FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D0C66A9D-F9ED-41A5-9089-26BCD8AF38FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D0C66A9D-F9ED-41A5-9089-26BCD8AF38FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D0C66A9D-F9ED-41A5-9089-26BCD8AF38FC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F0CE9CF6-8641-4450-8BD6-0AF831BEA166}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F0CE9CF6-8641-4450-8BD6-0AF831BEA166}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0CE9CF6-8641-4450-8BD6-0AF831BEA166}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0CE9CF6-8641-4450-8BD6-0AF831BEA166}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1C7982B-BCA1-4F20-86D4-DDCB88087CFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1C7982B-BCA1-4F20-86D4-DDCB88087CFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1C7982B-BCA1-4F20-86D4-DDCB88087CFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1C7982B-BCA1-4F20-86D4-DDCB88087CFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

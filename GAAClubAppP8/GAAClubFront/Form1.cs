@@ -20,10 +20,11 @@ namespace GAAClubFront
         {
             InitializeComponent();
             conn = new SqlConnection("Data Source=PETER-PC;Initial Catalog=GAAClub;Integrated Security=False;User Id=sa;Password=Pa55w0rd1234;MultipleActiveResultSets=True");
+            loadData();
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            loadData();
+
         }
         private void label1_Click(object sender, EventArgs e)
         {
@@ -34,15 +35,16 @@ namespace GAAClubFront
         
         private void button1_Click(object sender, EventArgs e)
         {
-            if ((tbID.Text != "") && (tbName.Text != "") && (tbAge.Text != "") && (tbHeight.Text != "") && (tbDist.Text != "") && (tbSpeed.Text != ""))
+            if ((tbName.Text != "") && (tbAge.Text != "") && (tbHeight.Text != "") && (tbDist.Text != "") && (tbSpeed.Text != ""))
             {
                 conn.Open();
                 cmd = new SqlCommand(@"Insert into Player 
                 (PlayerName, PlayerAge, PlayerHeight, RunningDistance, PlayerSpeed)
-                values (' " + tbName.Text + " ',' " + tbAge.Text + "','" + tbHeight.Text + "','" + tbDist.Text + "','" + tbSpeed.Text + "')", conn);
+                values ('"+ tbName.Text + " ',' " + tbAge.Text + "','" + tbHeight.Text + "','" + tbDist.Text + "','" + tbSpeed.Text + "')", conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();
                 MessageBox.Show("Player Added", "Standen GAA Technology");
+                
                 tbID.Text = "";
                 tbName.Text = "";
                 tbAge.Text = "";
@@ -75,6 +77,21 @@ namespace GAAClubFront
 
         private void ButtonSummary_Click(object sender, EventArgs e)
         {
+            listBox1.Items.Clear();
+            // create an instance of Stats
+            Stats stat = new Stats(conn);
+            listBox1.Items.Add("Mean Age: " + stat.getMeanAge());
+            listBox1.Items.Add("Max Age: " + stat.getMaxAge());
+            listBox1.Items.Add("Min Age: " + stat.getMinAge());
+            listBox1.Items.Add("Mean Run: " + stat.getMeanDist());
+            listBox1.Items.Add("Max Run: " + stat.getMaxDist());
+            listBox1.Items.Add("Min Run: " + stat.getMinDist());
+            listBox1.Items.Add("Mean Height: " + stat.getMeanHeight());
+            listBox1.Items.Add("Max Height: " + stat.getMaxHeight());
+            listBox1.Items.Add("Min Height: " + stat.getMinHeight());
+            listBox1.Items.Add("Mean Speed: " + stat.getMeanSpeed());
+            listBox1.Items.Add("Max Speed: " + stat.getMaxSpeed());
+            listBox1.Items.Add("Min Speed: " + stat.getMinSpeed());
 
         }
         private void button3_Click(object sender, EventArgs e)
@@ -101,7 +118,7 @@ namespace GAAClubFront
             dgvGaa.Rows.Clear();
             conn.Open();
             
-            cmd.CommandText = "select * from Player";
+            cmd = new SqlCommand("select * from Player",conn);
             dr = cmd.ExecuteReader();
             if (dr.HasRows)
             {
@@ -124,14 +141,32 @@ namespace GAAClubFront
             int x = dgv.CurrentCell.RowIndex;
             if (x != -1)
             {
-                DataGridViewRow row = dgv.SelectedRows[x];
+                //dgv.Rows(x).Selected = True;
+                DataGridViewRow row = dgv.Rows[x];
                 tbID.Text = row.Cells[0].Value.ToString();
                 tbName.Text = row.Cells[1].Value.ToString();
                 tbAge.Text = row.Cells[2].Value.ToString();
                 tbHeight.Text = row.Cells[3].Value.ToString();
                 tbDist.Text = row.Cells[4].Value.ToString();
                 tbSpeed.Text = row.Cells[5].Value.ToString();
+
+                // add exception around selecting a row which hasn't been filled
             }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            tbID.Text = "";
+            tbName.Text = "";
+            tbAge.Text = "";
+            tbHeight.Text = "";
+            tbDist.Text = "";
+            tbSpeed.Text = "";
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
