@@ -1,11 +1,16 @@
 ﻿using NUnit.Framework;
 
+
 namespace GAAClubFront.Test
 {
     //these tests use TrialDataAccess instead of DataAccess
     [TestFixture]
     public class Test1
     {
+
+
+
+
         Stats statTest;
         //set up is run before each test
         [SetUp]
@@ -123,26 +128,24 @@ namespace GAAClubFront.Test
         public void validateHTest()
         {
             InputValidator v = new InputValidator();
-            //set value randomly so "out" will work
-            int h = 0;
+
             // value of -10 should result in false
             // number is outside accepted range
             string enterValue = "-10";
             bool expected = false;
-            bool actual = v.validateHeight(enterValue, out h);
+            bool actual = v.validateHeight(enterValue);
             Assert.AreEqual(expected,actual);
         }
         [Test]
         public void validateATest()
         {
             InputValidator v = new InputValidator();
-            //set value randomly so "out" will work
-            int a = 0;
+
             // value of 18.5 should result in false
             // should be a whole number
             string enterValue = "18.5";
             bool expected = false;
-            bool actual = v.validateAge(enterValue, out a);
+            bool actual = v.validateAge(enterValue);
             Assert.AreEqual(expected, actual);
         }
         // boundary tests
@@ -150,13 +153,12 @@ namespace GAAClubFront.Test
         public void validateDTest()
         {
             InputValidator v = new InputValidator();
-            //set value randomly so "out" will work
-            int d = 0;
+
             // value of 1 should result in true
             // is a whole number just within range
             string enterValue = "1";
             bool expected = true;
-            bool actual = v.validateDist(enterValue, out d);
+            bool actual = v.validateDist(enterValue);
             Assert.AreEqual(expected, actual);
         }
 
@@ -164,28 +166,66 @@ namespace GAAClubFront.Test
         public void validateSTest()
         {
             InputValidator v = new InputValidator();
-            //set value randomly so "out" will work
-            double s = 0;
+
             // value of 8 should result in false
             // the number is just outside range
             string enterValue = "8";
             bool expected = false;
-            bool actual = v.validateSpeed(enterValue, out s);
+            bool actual = v.validateSpeed(enterValue);
             Assert.AreEqual(expected, actual);
         }
         [Test]
         public void validateSTest2()
         {
             InputValidator v = new InputValidator();
-            //set value randomly so "out" will work
-            double s = 0;
+
             // value of 3.788 should result in true
             // double format within range
             string enterValue2 = "3.788";
             bool expected = true;
-            bool actual = v.validateSpeed(enterValue2, out s);
+            bool actual = v.validateSpeed(enterValue2);
             Assert.AreEqual(expected, actual);
         }
+
+        // check that player has added
+        [Test]
+        public void validateAdd()
+        {
+            ModifyDatabase modify = new ModifyDatabase();
+            int orig = modify.countRows();
+            int expected = orig + 1;
+            modify.addPlayer("TestAdd",20,155,1200,2.1);
+            int actual = modify.countRows();
+            Assert.AreEqual(expected, actual);
+           
+        }
+        // check that update has worked by checking string in name
+        [Test]
+        public void validateUpdate()
+        {
+            ModifyDatabase modify = new ModifyDatabase();
+            // we know from above test that original name is TestAdd
+            modify.updatePlayer(modify.lastID, "TestChange", 20, 155, 1200, 2.1);
+            string expected = "TestChange";
+            modify.lastPlayerAdded();
+            string actual = modify.showName(modify.lastID);
+            Assert.AreEqual(expected, actual);
+
+        }
+        // check that player is deleted
+        [Test]
+        public void validateDelete()
+        {
+            ModifyDatabase modify = new ModifyDatabase();
+            int orig = modify.countRows();
+            int expected = orig - 1;
+            modify.lastPlayerAdded();
+            modify.removePlayer(modify.lastID);
+            int actual = modify.countRows();
+            Assert.AreEqual(expected, actual);
+
+        }
+
     }
 }
 

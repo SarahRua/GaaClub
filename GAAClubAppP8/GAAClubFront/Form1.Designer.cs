@@ -53,6 +53,11 @@
             this.button3 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.NameError = new System.Windows.Forms.Label();
+            this.AgeError = new System.Windows.Forms.Label();
+            this.HeightError = new System.Windows.Forms.Label();
+            this.DistError = new System.Windows.Forms.Label();
+            this.SpeedError = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGaa)).BeginInit();
             this.SuspendLayout();
             // 
@@ -261,11 +266,62 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // NameError
+            // 
+            this.NameError.AutoSize = true;
+            this.NameError.Location = new System.Drawing.Point(258, 239);
+            this.NameError.Name = "NameError";
+            this.NameError.Size = new System.Drawing.Size(35, 13);
+            this.NameError.TabIndex = 19;
+            this.NameError.Text = "label7";
+            // 
+            // AgeError
+            // 
+            this.AgeError.AutoSize = true;
+            this.AgeError.Location = new System.Drawing.Point(258, 270);
+            this.AgeError.Name = "AgeError";
+            this.AgeError.Size = new System.Drawing.Size(35, 13);
+            this.AgeError.TabIndex = 20;
+            this.AgeError.Text = "label8";
+            // 
+            // HeightError
+            // 
+            this.HeightError.AutoSize = true;
+            this.HeightError.Location = new System.Drawing.Point(258, 296);
+            this.HeightError.Name = "HeightError";
+            this.HeightError.Size = new System.Drawing.Size(35, 13);
+            this.HeightError.TabIndex = 21;
+            this.HeightError.Text = "label9";
+            this.HeightError.Click += new System.EventHandler(this.label9_Click);
+            // 
+            // DistError
+            // 
+            this.DistError.AutoSize = true;
+            this.DistError.Location = new System.Drawing.Point(258, 326);
+            this.DistError.Name = "DistError";
+            this.DistError.Size = new System.Drawing.Size(41, 13);
+            this.DistError.TabIndex = 22;
+            this.DistError.Text = "label10";
+            // 
+            // SpeedError
+            // 
+            this.SpeedError.AutoSize = true;
+            this.SpeedError.Location = new System.Drawing.Point(258, 358);
+            this.SpeedError.Name = "SpeedError";
+            this.SpeedError.Size = new System.Drawing.Size(41, 13);
+            this.SpeedError.TabIndex = 23;
+            this.SpeedError.Text = "label11";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(693, 425);
+            this.Controls.Add(this.SpeedError);
+            this.Controls.Add(this.DistError);
+            this.Controls.Add(this.HeightError);
+            this.Controls.Add(this.AgeError);
+            this.Controls.Add(this.NameError);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.dgvGaa);
@@ -321,6 +377,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label NameError;
+        private System.Windows.Forms.Label AgeError;
+        private System.Windows.Forms.Label HeightError;
+        private System.Windows.Forms.Label DistError;
+        private System.Windows.Forms.Label SpeedError;
     }
 }
 

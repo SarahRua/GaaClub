@@ -4,12 +4,16 @@ namespace GAAClubFront
 {
     public class InputValidator
     {
+        public int h;
+        public int a;
+        public int d;
+        public double s; 
         // this method takes input from the console
         // (passed from the program class)
         // it tries to parse this value and checks if
         // it is in a standard format
         // before allowing data to be stored in the database.
-        public bool validateHeight(String input, out int h)
+        public bool validateHeight(String input)
         {
             // if it is possible to parse this input as an int
             // this will return true.
@@ -29,6 +33,7 @@ namespace GAAClubFront
             if (result = true && h > 100 && h < 250)
             {
                 return true;
+                
             }
             else
             {
@@ -37,7 +42,7 @@ namespace GAAClubFront
 
         }
 
-        public bool validateAge(string input, out int a)
+        public bool validateAge(string input)
         {
             bool result = Int32.TryParse(input, out a);
 
@@ -51,7 +56,7 @@ namespace GAAClubFront
             }
         }
 
-        public bool validateDist(string input, out int d)
+        public bool validateDist(string input)
         {
             bool result = Int32.TryParse(input, out d);
 
@@ -64,7 +69,7 @@ namespace GAAClubFront
                 return false;
             }
         }
-        public bool validateSpeed(string input, out double s)
+        public bool validateSpeed(string input)
         {
             bool result = Double.TryParse(input, out s);
 

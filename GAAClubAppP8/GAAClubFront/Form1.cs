@@ -32,39 +32,152 @@ namespace GAAClubFront
         }
 
 
-        
+        // add user
         private void button1_Click(object sender, EventArgs e)
         {
             if ((tbName.Text != "") && (tbAge.Text != "") && (tbHeight.Text != "") && (tbDist.Text != "") && (tbSpeed.Text != ""))
             {
-                conn.Open();
-                cmd = new SqlCommand(@"Insert into Player 
-                (PlayerName, PlayerAge, PlayerHeight, RunningDistance, PlayerSpeed)
-                values ('"+ tbName.Text + " ',' " + tbAge.Text + "','" + tbHeight.Text + "','" + tbDist.Text + "','" + tbSpeed.Text + "')", conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                MessageBox.Show("Player Added", "Standen GAA Technology");
-                
-                tbID.Text = "";
-                tbName.Text = "";
-                tbAge.Text = "";
-                tbHeight.Text = "";
-                tbDist.Text = "";
-                tbSpeed.Text = "";
-                loadData();
+                InputValidator v = new InputValidator();
+                int age =-10;
+                int height =-10;
+                double speed =-10;
+                int dist =-10;
+                // check input with validator before entering data into table
+
+                string error = "Invalid";
+
+
+                bool vA = v.validateAge(tbAge.Text);
+                if (vA == false)
+                {
+
+                    AgeError.Text = error;
+                }
+                else if (vA == true)
+                {
+                    AgeError.Text = "";
+                    age = v.a;
+                }
+                bool vH = v.validateHeight(tbHeight.Text);
+                if (vH == false)
+                {
+                    HeightError.Text = error;
+                }
+                else  if (vH ==true)
+                {
+                    HeightError.Text = "";
+                    height = v.h;
+                }
+                bool vD = v.validateDist(tbDist.Text);
+                if (vD == false)
+                {
+                    DistError.Text = error;
+                }
+                else if (vD ==true)
+                {
+                    DistError.Text = "";
+                    dist = v.d;
+                }
+                bool vS = v.validateSpeed(tbSpeed.Text);
+                if (vS == false)
+                {
+                    SpeedError.Text = error;
+                }
+                else if (vS == true)
+                {
+                    SpeedError.Text = "";
+                    speed = v.s;
+                }
+                if ((vA == true) &&( vH == true) && (vD == true) && (vS == true) && (tbName.Text != ""))
+                {
+                    AgeError.Text = "";
+                    HeightError.Text = "";
+                    DistError.Text = "";
+                    SpeedError.Text = "";
+
+                    // call modify database
+                    ModifyDatabase modify = new ModifyDatabase();
+                    modify.addPlayer(tbName.Text, age, height, dist, speed);
+
+                    MessageBox.Show("Player Added", "Standen GAA Technology");
+
+                    tbID.Text = "";
+                    tbName.Text = "";
+                    tbAge.Text = "";
+                    tbHeight.Text = "";
+                    tbDist.Text = "";
+                    tbSpeed.Text = "";
+                    loadData();
+                }
+                else
+                {
+                    MessageBox.Show("Player Not Added. Enter valid data", "Standen GAA Technology");
+                }
+                }
             }
-        }
-        
+        // update player
         private void ButtonUpdate_Click(object sender, EventArgs e)
         {
-            if ((tbID.Text != "") && (tbName.Text != "") && (tbAge.Text != "") && (tbHeight.Text != "") && (tbDist.Text != "") && (tbSpeed.Text != ""))
+            if ((tbName.Text != "") && (tbAge.Text != "") && (tbHeight.Text != "") && (tbDist.Text != "") && (tbSpeed.Text != ""))
             {
-                conn.Open();
-                cmd = new SqlCommand(@"Update Player 
-                set PlayerName = '" + tbName.Text + "', PlayerAge = '" + tbAge.Text + "', PlayerHeight = '" + tbHeight.Text + "', RunningDistance='" + tbDist.Text + "', PlayerSpeed='" + tbSpeed.Text + "' where (PlayerID ='" + tbID.Text + "')", conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                MessageBox.Show("Player Updated", "Standen GAA Technology");
+                InputValidator v = new InputValidator();
+                int age = -10;
+                int height = -10;
+                double speed = -10;
+                int dist = -10;
+                // check input with validator before entering data into table
+
+                string error = "Invalid";
+
+
+                bool vA = v.validateAge(tbAge.Text);
+                if (vA == false)
+                {
+
+                    AgeError.Text = error;
+                }
+                else if (vA == true)
+                {
+                    AgeError.Text = "";
+                    age = v.a;
+                }
+                bool vH = v.validateHeight(tbHeight.Text);
+                if (vH == false)
+                {
+                    HeightError.Text = error;
+                }
+                else if (vH == true)
+                {
+                    HeightError.Text = "";
+                    height = v.h;
+                }
+                bool vD = v.validateDist(tbDist.Text);
+                if (vD == false)
+                {
+                    DistError.Text = error;
+                }
+                else if (vD == true)
+                {
+                    DistError.Text = "";
+                    dist = v.d;
+                }
+                bool vS = v.validateSpeed(tbSpeed.Text);
+                if (vS == false)
+                {
+                    SpeedError.Text = error;
+                }
+                else if (vS == true)
+                {
+                    SpeedError.Text = "";
+                    speed = v.s;
+                }
+                if ((vA == true) && (vH == true) && (vD == true) && (vS == true) && (tbName.Text != ""))
+                {
+                    //call update method in modify database
+                    ModifyDatabase modify = new ModifyDatabase();
+                    modify.updatePlayer(tbID.Text, tbName.Text, age, height, dist, speed);
+
+                    MessageBox.Show("Player Updated", "Standen GAA Technology");
                 tbID.Text = "";
                 tbName.Text = "";
                 tbAge.Text = "";
@@ -72,6 +185,11 @@ namespace GAAClubFront
                 tbDist.Text = "";
                 tbSpeed.Text = "";
                 loadData();
+                }
+                else
+                {
+                    MessageBox.Show("Player Not Updated. Enter valid data", "Standen GAA Technology");
+                }
             }
         }
 
@@ -80,27 +198,27 @@ namespace GAAClubFront
             listBox1.Items.Clear();
             // create an instance of Stats
             Stats stat = new Stats(conn);
-            listBox1.Items.Add("Mean Age: " + stat.getMeanAge());
-            listBox1.Items.Add("Max Age: " + stat.getMaxAge());
-            listBox1.Items.Add("Min Age: " + stat.getMinAge());
-            listBox1.Items.Add("Mean Run: " + stat.getMeanDist());
-            listBox1.Items.Add("Max Run: " + stat.getMaxDist());
-            listBox1.Items.Add("Min Run: " + stat.getMinDist());
-            listBox1.Items.Add("Mean Height: " + stat.getMeanHeight());
-            listBox1.Items.Add("Max Height: " + stat.getMaxHeight());
-            listBox1.Items.Add("Min Height: " + stat.getMinHeight());
-            listBox1.Items.Add("Mean Speed: " + stat.getMeanSpeed());
-            listBox1.Items.Add("Max Speed: " + stat.getMaxSpeed());
-            listBox1.Items.Add("Min Speed: " + stat.getMinSpeed());
+            listBox1.Items.Add("Mean Age:   \t" + stat.getMeanAge());
+            listBox1.Items.Add("Max Age:    \t" + stat.getMaxAge());
+            listBox1.Items.Add("Min Age:    \t" + stat.getMinAge());
+            listBox1.Items.Add("Mean Run:   \t" + stat.getMeanDist());
+            listBox1.Items.Add("Max Run:    \t" + stat.getMaxDist());
+            listBox1.Items.Add("Min Run:    \t" + stat.getMinDist());
+            listBox1.Items.Add("Mean Height:\t" + stat.getMeanHeight());
+            listBox1.Items.Add("Max Height: \t" + stat.getMaxHeight());
+            listBox1.Items.Add("Min Height: \t" + stat.getMinHeight());
+            listBox1.Items.Add("Mean Speed: \t" + stat.getMeanSpeed());
+            listBox1.Items.Add("Max Speed:  \t" + stat.getMaxSpeed());
+            listBox1.Items.Add("Min Speed:  \t" + stat.getMinSpeed());
 
         }
+        //remove player
         private void button3_Click(object sender, EventArgs e)
         {
-            conn.Open();
-            cmd = new SqlCommand(@"Delete from Player 
-                where(PlayerID = '" +tbID.Text+"')", conn);
-            cmd.ExecuteNonQuery();
-            conn.Close();
+            //call remove method in modify database
+            ModifyDatabase modify = new ModifyDatabase();
+            modify.removePlayer(tbID.Text);
+
             MessageBox.Show("Player Deleted", "Standen GAA Technology");
             tbID.Text = "";
             tbName.Text = "";
@@ -115,10 +233,11 @@ namespace GAAClubFront
 
         private void loadData()
         {
+
             dgvGaa.Rows.Clear();
             conn.Open();
-            
-            cmd = new SqlCommand("select * from Player",conn);
+
+            cmd = new SqlCommand("select * from Player", conn);
             dr = cmd.ExecuteReader();
             if (dr.HasRows)
             {
@@ -128,8 +247,13 @@ namespace GAAClubFront
                 }
             }
             conn.Close();
-            
+            NameError.Text = "";
+            AgeError.Text = "";
+            HeightError.Text = "";
+            DistError.Text = "";
+            SpeedError.Text = "";
         }
+
         private void dgvGaa_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -165,6 +289,11 @@ namespace GAAClubFront
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
         {
 
         }
