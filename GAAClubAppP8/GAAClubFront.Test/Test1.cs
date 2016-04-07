@@ -8,9 +8,6 @@ namespace GAAClubFront.Test
     public class Test1
     {
 
-
-
-
         Stats statTest;
         //set up is run before each test
         [SetUp]
@@ -134,7 +131,7 @@ namespace GAAClubFront.Test
             string enterValue = "-10";
             bool expected = false;
             bool actual = v.validateHeight(enterValue);
-            Assert.AreEqual(expected,actual);
+            Assert.AreEqual(expected, actual);
         }
         [Test]
         public void validateATest()
@@ -194,20 +191,22 @@ namespace GAAClubFront.Test
             ModifyDatabase modify = new ModifyDatabase();
             int orig = modify.countRows();
             int expected = orig + 1;
-            modify.addPlayer("TestAdd",20,155,1200,2.1);
+            modify.addPlayer("TestAdd", 20, 155, 1200, 2.1);
             int actual = modify.countRows();
             Assert.AreEqual(expected, actual);
-           
         }
+
         // check that update has worked by checking string in name
         [Test]
         public void validateUpdate()
         {
             ModifyDatabase modify = new ModifyDatabase();
+            //call lastPlayerAdded to generate new lastID
+            modify.lastPlayerAdded();
             // we know from above test that original name is TestAdd
             modify.updatePlayer(modify.lastID, "TestChange", 20, 155, 1200, 2.1);
             string expected = "TestChange";
-            modify.lastPlayerAdded();
+
             string actual = modify.showName(modify.lastID);
             Assert.AreEqual(expected, actual);
 

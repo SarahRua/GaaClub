@@ -15,7 +15,7 @@ namespace GAAClubFront
             // the constructor string is set.
             this.conn = conn;
         }
-  
+
         // the following method allows me to take in a query and
         // run this query in a sqlcommand. I can pass in a different string
         // for each query I want to call.

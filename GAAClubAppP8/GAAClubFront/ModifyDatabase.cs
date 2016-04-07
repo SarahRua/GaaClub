@@ -7,19 +7,22 @@ using System.Data.SqlClient;
 
 namespace GAAClubFront
 {
+    // this class does most of the data accessing from the database.
+    // While I use IDataAccess implementations for the statistics summary,
+    // here I use modifydatabase to do my adding, updating, deleting, etc.
     public class ModifyDatabase
     {
         SqlConnection conn;
         SqlCommand cmd;
-        SqlDataReader dr;
-
-        public string lastID { get; set; }
+        // this lastID field is used to get the last record entered
+        public int lastID { get; set; }
         public ModifyDatabase()
         {
+            //this connection allows me to connect to my database
             conn = new SqlConnection("Data Source=PETER-PC;Initial Catalog=GAAClub;Integrated Security=False;User Id=sa;Password=Pa55w0rd1234;MultipleActiveResultSets=True");
 
         }
-
+        // addPlayer accesses the database and inserts the new record
         public void addPlayer(string n, int a, int h, int d, double s)
         {
             conn.Open();
@@ -29,18 +32,18 @@ namespace GAAClubFront
             cmd.ExecuteNonQuery();
             conn.Close();
         }
-
+        // lastPlayerAdded gets the id of the last record entered
         public void lastPlayerAdded()
         {
             conn.Open();
 
-            cmd = new SqlCommand("select PlayerID from Player", conn);
-            dr = cmd.ExecuteReader();
-            // use exception handling
+            cmd = new SqlCommand("select MAX(PlayerID) from Player", conn);
+
+            // use exception handling for the case that there are no records
             try
             {
-                int i = dr.FieldCount;
-                lastID = dr[i].ToString();
+                lastID = (int)cmd.ExecuteScalar();
+
             }
             catch
             {
@@ -52,17 +55,20 @@ namespace GAAClubFront
             }
         }
 
-        public string showName(string id)
+        // showName connects to the database and extracts the name value from a 
+        // particular record
+        public string showName(int id)
         {
             conn.Open();
 
-            cmd = new SqlCommand("select PlayerName from Player where (PlayerID = '"+id+"')", conn);
+            cmd = new SqlCommand("select PlayerName from Player where (PlayerID = '" + id + "')", conn);
             string dr = (string)cmd.ExecuteScalar();
             conn.Close();
             return dr;
         }
 
-        public void removePlayer(string id)
+        // removePlayer connects to the database and deletes a particular record
+        public void removePlayer(int id)
         {
             conn.Open();
             cmd = new SqlCommand(@"Delete from Player 
@@ -72,8 +78,8 @@ namespace GAAClubFront
         }
 
 
-
-        public void updatePlayer(string id, string n, int a, int h, int d, double s)
+        // updatePlayer connects to the database and changes a particular record
+        public void updatePlayer(int id, string n, int a, int h, int d, double s)
         {
             conn.Open();
             cmd = new SqlCommand(@"Update Player 
@@ -81,6 +87,8 @@ namespace GAAClubFront
             cmd.ExecuteNonQuery();
             conn.Close();
         }
+        //countRows tells me how many rows are in the database.
+        //I use this for testing
         public int countRows()
         {
             conn.Open();
